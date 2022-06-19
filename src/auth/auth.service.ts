@@ -1,13 +1,7 @@
-import {
-  BadRequestException,
-  ConflictException,
-  Injectable,
-} from '@nestjs/common'
+import { BadRequestException, ConflictException } from '@nestjs/common'
 import { Prisma } from '@prisma/client'
+import { PrismaService } from 'nestjs-prisma'
 import { PasswordService } from 'src/auth/password.service'
-import { PrismaService } from 'src/prisma/prisma.service'
-
-@Injectable()
 export class AuthService {
   constructor(
     private readonly prisma: PrismaService,

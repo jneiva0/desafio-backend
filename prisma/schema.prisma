@@ -24,6 +24,7 @@ model Restaurant {
   updatedAt DateTime   @updatedAt
   name      String     @unique
   phone     String
+  imageSrc  String?
   address   String
   menu      MenuItem[]
 
@@ -36,6 +37,7 @@ model MenuItem {
   name         String
   description  String
   price        Float
+  imageSrc     String?
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId Int
 }
