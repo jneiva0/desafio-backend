@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   email     String   @unique
   password  String
@@ -19,7 +19,7 @@ model User {
 
 //restaurante com nome, telefone e endereco
 model Restaurant {
-  id        Int        @id @default(autoincrement())
+  id        String     @id @default(cuid())
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   name      String     @unique
@@ -31,7 +31,7 @@ model Restaurant {
 }
 
 model MenuItem {
-  id           Int        @id @default(autoincrement())
+  id           String     @id @default(cuid())
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   name         String
@@ -39,5 +39,5 @@ model MenuItem {
   price        Float
   imageSrc     String?
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
-  restaurantId Int
+  restaurantId String
 }

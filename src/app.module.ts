@@ -3,9 +3,7 @@ import { PrismaModule } from 'nestjs-prisma'
 import { AppController } from 'src/app.controller'
 import { AppService } from 'src/app.service'
 import { AuthModule } from 'src/auth/auth.module'
-import { AuthService } from 'src/auth/auth.service'
 import { loggingMiddleware } from 'src/middleware/logging-middleware'
-import { UsersService } from 'src/users/users.service'
 import { RestaurantsModule } from './restaurants/restaurants.module'
 
 @Module({
@@ -23,6 +21,6 @@ import { RestaurantsModule } from './restaurants/restaurants.module'
     RestaurantsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UsersService, AuthService],
+  providers: [AppService],
 })
 export class AppModule {}

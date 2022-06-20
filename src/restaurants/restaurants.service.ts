@@ -9,10 +9,12 @@ export class RestaurantsService {
     return this.prisma.restaurant.findMany()
   }
 
-  async getRestaurant(id: number) {
-    console.log(id)
+  async getRestaurant(id: string) {
     return this.prisma.restaurant.findUnique({
       where: { id },
+      include: {
+        menu: true,
+      },
     })
   }
 }

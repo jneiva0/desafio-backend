@@ -1,17 +1,26 @@
-import { Controller, Get, Param } from '@nestjs/common'
+import { Controller, Get, Param, UseGuards } from '@nestjs/common'
+import { ApiBearerAuth } from '@nestjs/swagger'
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
+import {
+  RestaurantResponse,
+  RestaurantWithMenuResponse,
+} from 'src/restaurants/restaurants.dto'
 import { RestaurantsService } from 'src/restaurants/restaurants.service'
 
+@ApiBearerAuth()
 @Controller('restaurants')
 export class RestaurantsController {
   constructor(private readonly restaurantsService: RestaurantsService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  getAll() {
+  getAll(): Promise<RestaurantResponse[]> {
     return this.restaurantsService.getRestaurants()
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
-  getOne(@Param('id') id: number) {
+  getOne(@Param('id') id: string): Promise<RestaurantWithMenuResponse> {
     return this.restaurantsService.getRestaurant(id)
   }
 }
