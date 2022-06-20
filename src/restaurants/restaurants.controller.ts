@@ -1,5 +1,5 @@
 import { Controller, Get, Param, UseGuards } from '@nestjs/common'
-import { ApiBearerAuth } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
 import {
   RestaurantResponse,
@@ -7,6 +7,7 @@ import {
 } from 'src/restaurants/restaurants.dto'
 import { RestaurantsService } from 'src/restaurants/restaurants.service'
 
+@ApiTags('restaurants')
 @ApiBearerAuth()
 @Controller('restaurants')
 export class RestaurantsController {

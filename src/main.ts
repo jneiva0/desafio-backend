@@ -1,6 +1,10 @@
 import { ValidationPipe } from '@nestjs/common'
 import { HttpAdapterHost, NestFactory } from '@nestjs/core'
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import {
+  DocumentBuilder,
+  SwaggerDocumentOptions,
+  SwaggerModule,
+} from '@nestjs/swagger'
 import { PrismaClientExceptionFilter, PrismaService } from 'nestjs-prisma'
 import { AppModule } from './app.module'
 
@@ -31,9 +35,17 @@ async function bootstrap() {
   //Nao tem muito uso em um mvp mas em um app grande ajuda bastante a manter uma boa arquitetura
   const config = new DocumentBuilder()
     .setTitle('CookedIn API')
+    .addTag('auth', 'autenticacao')
+    .addTag('restaurants', 'restaurantes')
     .addBearerAuth()
     .build()
-  const document = SwaggerModule.createDocument(app, config)
+
+  //Melhora o nome dos tipos ao exportar a API para o frontend
+  const options: SwaggerDocumentOptions = {
+    operationIdFactory: (controllerKey: string, methodKey: string) => methodKey,
+  }
+
+  const document = SwaggerModule.createDocument(app, config, options)
   SwaggerModule.setup('api', app, document)
 
   await app.listen(4000)

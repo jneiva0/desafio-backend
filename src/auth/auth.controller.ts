@@ -1,11 +1,12 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common'
-import { ApiBearerAuth } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { User } from '@prisma/client'
 import { AuthService } from 'src/auth/auth.service'
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
 import { CurrentUser } from 'src/users/user.decorator'
 import { AuthToken, LoginDto, RegisterDto, UserResponse } from './auth.dto'
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
