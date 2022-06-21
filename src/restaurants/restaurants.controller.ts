@@ -4,6 +4,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
 import {
   RestaurantResponse,
   RestaurantWithMenuResponse,
+  SearchResponse,
 } from 'src/restaurants/restaurants.dto'
 import { RestaurantsService } from 'src/restaurants/restaurants.service'
 
@@ -23,5 +24,11 @@ export class RestaurantsController {
   @Get(':id')
   getOne(@Param('id') id: string): Promise<RestaurantWithMenuResponse> {
     return this.restaurantsService.getRestaurant(id)
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('search')
+  search(@Param('searchInput') searchInput: string): Promise<SearchResponse> {
+    return this.restaurantsService.searchRestaurantsAndMenus(searchInput)
   }
 }

@@ -26,3 +26,10 @@ export class RestaurantWithMenuResponse extends RestaurantResponse {
   @ApiProperty({ isArray: true, type: MenuItemResponse })
   menu: MenuItem[]
 }
+
+export class SearchResponse {
+  @ApiProperty({ isArray: true, type: RestaurantResponse })
+  restaurants: RestaurantResponse[]
+  @ApiProperty({ isArray: true, type: MenuItemResponse })
+  itens: MenuItem[]
+}
