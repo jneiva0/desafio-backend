@@ -27,7 +27,7 @@ export class RestaurantsController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('search')
+  @Get('search/:searchInput')
   search(@Param('searchInput') searchInput: string): Promise<SearchResponse> {
     return this.restaurantsService.searchRestaurantsAndMenus(searchInput)
   }
